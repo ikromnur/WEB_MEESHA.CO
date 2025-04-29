@@ -1,18 +1,27 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Providers from '@/providers';
+import Providers from "@/providers";
 
 const interSans = Inter({
   variable: "--font-inter",
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Meesha.co | Florist Kebumen ",
+  title: {
+    default: "Bouquet & Florist Kebumen",
+    template: "%s | Bouquet & Florist Kebumen",
+  },
   description: "Bouquet dan Florist Kebumen",
   icons: {
-    icon: "#", 
+    icon: "#",
   },
 };
 
@@ -24,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${interSans.variable} antialiased`}
+        className={`${interSans.variable} ${poppins.variable} antialiased font-poppins`}
       >
         <Providers>{children}</Providers>
       </body>
