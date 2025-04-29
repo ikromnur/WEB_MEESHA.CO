@@ -1,8 +1,7 @@
 import React from "react";
-import DefaultHeader from "@/components/container/header";
 
 const Home = () => {
-  return <DefaultHeader />;
+  return <div className="">tes</div>;
 };
 
 export default Home;

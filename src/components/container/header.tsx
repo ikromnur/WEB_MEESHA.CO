@@ -90,99 +90,96 @@ const DefaultHeader = () => {
   };
 
   return (
-    <>
-      <header className="fixed top-0 left-0 right-0 bg-white z-50 shadow">
-        <div className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4">
-          <Link href="/">
-            <Image
-              width={200}
-              height={100}
-              src={logo}
-              alt="logo"
-              className="w-[195.45px] h-auto"
-            />
-          </Link>
+    <header className="fixed top-0 left-0 right-0 bg-white z-50 shadow">
+      <div className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4">
+        <Link href="/">
+          <Image
+            width={200}
+            height={100}
+            src={logo}
+            alt="logo"
+            className="w-[195.45px] h-auto"
+          />
+        </Link>
 
-          <Navigation />
+        <Navigation />
 
-          <div className="flex items-center gap-4">
-            {/* Cart */}
-            <div className="relative">
-              <Button
-                onClick={() => router.push("/cart")}
-                size={"icon"}
-                variant={"secondary"}
-                className="rounded-full"
-              >
-                <TbShoppingBag />
-              </Button>
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 text-[10px] px-1 py-1 w-5 h-5 flex items-center justify-center rounded-full"
-              >
-                1
-              </Badge>
-            </div>
-
-            {/* Auth */}
-            {session ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="flex items-center gap-3 cursor-pointer">
-                    <Avatar>
-                      <AvatarImage
-                        src="https://github.com/shadcn.png"
-                        alt="@shadcn"
-                      />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <div className=" flex-col hidden md:flex">
-                      <span className="text-xs text-[#C0C3C6]">
-                        {getGreeting()}
-                      </span>
-                      <span className="text-sm font-semibold">
-                        {session?.user?.name}
-                      </span>
-                    </div>
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => router.push("/profile")}>
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => router.push("/history")}>
-                    Riwayat
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Button variant={"ghost"} onClick={() => router.push("/login")}>
-                Login
-              </Button>
-            )}
-
-            {/* Sidebar */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button size={"icon"} variant={"outline"} className="lg:hidden">
-                  <IoMenu />
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Menu</SheetTitle>
-                </SheetHeader>
-                <Navigation className="flex-col mt-4 flex" variant="aside" />
-              </SheetContent>
-            </Sheet>
+        <div className="flex items-center gap-4">
+          {/* Cart */}
+          <div className="relative">
+            <Button
+              onClick={() => router.push("/cart")}
+              size={"icon"}
+              variant={"secondary"}
+              className="rounded-full"
+            >
+              <TbShoppingBag />
+            </Button>
+            <Badge
+              variant="destructive"
+              className="absolute -top-1 -right-1 text-[10px] px-1 py-1 w-5 h-5 flex items-center justify-center rounded-full"
+            >
+              1
+            </Badge>
           </div>
+
+          {/* Auth */}
+          {session ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center gap-3 cursor-pointer">
+                  <Avatar>
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="@shadcn"
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <div className=" flex-col hidden md:flex">
+                    <span className="text-xs text-[#C0C3C6]">
+                      {getGreeting()}
+                    </span>
+                    <span className="text-sm font-semibold">
+                      {session?.user?.name}
+                    </span>
+                  </div>
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push("/profile")}>
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/history")}>
+                  Riwayat
+                </DropdownMenuItem>
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button variant={"ghost"} onClick={() => router.push("/login")}>
+              Login
+            </Button>
+          )}
+
+          {/* Sidebar */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button size={"icon"} variant={"outline"} className="lg:hidden">
+                <IoMenu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              <Navigation className="flex-col mt-4 flex" variant="aside" />
+            </SheetContent>
+          </Sheet>
         </div>
-      </header>
-      <div className="w-full bg-white h-[1000px]">tex</div>
-    </>
+      </div>
+    </header>
   );
 };
 
