@@ -15,7 +15,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Meesha.co | Florist Kebumen ",
+  title: {
+    default: "Bouquet & Florist Kebumen",
+    template: "%s | Bouquet & Florist Kebumen",
+  },
   description: "Bouquet dan Florist Kebumen",
   icons: {
     icon: "#",

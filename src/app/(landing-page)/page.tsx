@@ -1,7 +1,11 @@
-import React from "react";
+import Homepage from "@/components/pages/landing-page/home";
+
+export const metadata = {
+  title: "Home",
+};
 
 const Home = () => {
-  return <div className="">tes</div>;
+  return <Homepage />;
 };
 
 export default Home;

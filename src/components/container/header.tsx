@@ -56,7 +56,13 @@ const Navigation = ({
           >
             <Button
               onClick={() => router.push(item.href)}
-              variant={isActive ? "default" : "ghost"}
+              variant={
+                isActive
+                  ? "default"
+                  : variant === "aside"
+                  ? "secondary"
+                  : "ghost"
+              }
               size={variant === "aside" ? "lg" : "default"}
               className={`hover:bg-primary hover:text-primary-foreground ${
                 isActive ? "bg-primary text-primary-foreground" : ""
@@ -98,6 +104,7 @@ const DefaultHeader = () => {
             height={100}
             src={logo}
             alt="logo"
+            priority
             className="w-[195.45px] h-auto"
           />
         </Link>
