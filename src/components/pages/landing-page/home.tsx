@@ -7,6 +7,7 @@ import vector from "../../../../public/vector-1.svg";
 import banner from "../../../../public/banner-1.png";
 import banner2 from "../../../../public/banner-2.png";
 import { popular, collection, socialMedia } from "@/data/static-data";
+import { cn } from "@/lib/utils";
 
 const CardCollection = ({
   name,
@@ -90,6 +91,46 @@ const CardSocialMedia = ({
         alt={name}
       />
     </a>
+  );
+};
+
+export const GalleryCollection = ({ className }: { className?: string }) => {
+  return (
+    <section className={cn("py-7", className)}>
+      <div className="text-center">
+        <span>Share your setup with</span>
+        <h2 className="font-bold text-3xl">#Meesha.co</h2>
+      </div>
+      <Image
+        className="w-screen h-auto"
+        src={banner2}
+        width={800}
+        height={800}
+        alt="banner"
+      />
+    </section>
+  );
+};
+
+export const SocialMediaSection = ({ className }: { className?: string }) => {
+  return (
+    <section
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 gap-6 py-7 mx-auto max-w-screen-xl px-4",
+        className
+      )}
+    >
+      {socialMedia.map((item) => (
+        <CardSocialMedia
+          key={item.id}
+          name={item.name}
+          image={item.image}
+          icon={item.iconSource}
+          textColor={item.color}
+          href={item.link}
+        />
+      ))}
+    </section>
   );
 };
 
@@ -198,33 +239,10 @@ const Homepage = () => {
         </section>
 
         {/* Gallery */}
-        <section className="py-7 ">
-          <div className="text-center">
-            <span>Share your setup with</span>
-            <h2 className="font-bold text-3xl">#Meesha.co</h2>
-          </div>
-          <Image
-            className="w-screen h-auto"
-            src={banner2}
-            width={800}
-            height={800}
-            alt="banner"
-          />
-        </section>
+        <GalleryCollection />
 
         {/* Social Media */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 py-7 mx-auto max-w-screen-xl px-4">
-          {socialMedia.map((item) => (
-            <CardSocialMedia
-              key={item.id}
-              name={item.name}
-              image={item.image}
-              icon={item.iconSource}
-              textColor={item.color}
-              href={item.link}
-            />
-          ))}
-        </section>
+        <SocialMediaSection />
       </div>
     </>
   );
