@@ -9,6 +9,7 @@ import socialMedia1 from "../../public/social-media-1.png";
 import socialMedia2 from "../../public/social-media-2.png";
 import instagram from "../../public/instagram.png";
 import tiktok from "../../public/tiktok.png";
+import whatsapp from "../../public/whatsapp.png";
 
 export const popular = [
   {
@@ -67,5 +68,13 @@ export const socialMedia = [
     image: socialMedia2,
     color: "#383838",
     link: "https://www.tiktok.com/@floristkebumen",
+  },
+  {
+    id: 3,
+    name: "Whatsapp",
+    iconSource: whatsapp,
+    image: "",
+    color: "#65D63F",
+    link: "https://wa.me/6281215034540",
   },
 ];

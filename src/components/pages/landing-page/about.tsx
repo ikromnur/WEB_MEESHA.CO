@@ -6,7 +6,6 @@ import { GalleryCollection, SocialMediaSection } from "./home";
 import Image from "next/image";
 import flower1 from "../../../../public/flower-3.png";
 import flower2 from "../../../../public/flower-4.png";
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -14,8 +13,10 @@ import {
   contactSchema,
 } from "@/features/contact/form/contact";
 import ContactForm from "@/features/contact/components/contact-form";
+import { useRouter } from "next/navigation";
 
 const AboutPage = () => {
+  const router = useRouter();
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -48,15 +49,21 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="flex items-center gap-4 justify-center ">
-            <Button size={"lg"}>Pesan Sekarang</Button>
-            <Button size={"lg"} className="bg-[#EC9696]/60">
+            <Button onClick={() => router.push("/products")} size={"lg"}>
+              Pesan Sekarang
+            </Button>
+            <Button
+              onClick={() => router.push("/products")}
+              size={"lg"}
+              className="bg-[#EC9696]/60"
+            >
               Lihat Buket
             </Button>
           </div>
         </section>
 
         {/* Message */}
-        <section className="py-7 md:flex items-center md:justify-between lg:justify-center gap-4 md:gap-8 relative">
+        <section className="py-7 md:flex items-center md:justify-between lg:justify-center gap-4 md:gap-8 relative overflow-hidden">
           <div className="space-y-4 md:mt-10">
             <span className="text-primary font-bold">Tim Buket Bunga</span>
             <h2 className="text-3xl font-semibold mb-2 max-w-sm leading-10">
