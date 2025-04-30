@@ -120,7 +120,7 @@ export const SocialMediaSection = ({ className }: { className?: string }) => {
         className
       )}
     >
-      {socialMedia.map((item) => (
+      {socialMedia.slice(0, 2).map((item) => (
         <CardSocialMedia
           key={item.id}
           name={item.name}
