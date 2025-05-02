@@ -85,7 +85,7 @@ const DefaultFooter = () => {
           <div className="flex items-center gap-2 flex-col md:flex-row">
             <div className="flex items-center gap-4">
               <Button
-                onClick={() => router.push("/terms-of-service")}
+                onClick={() => router.push("/terms")}
                 className="text-[#333] font-normal text-sm"
                 variant={"link"}
                 size={"sm"}
