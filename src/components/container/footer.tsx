@@ -49,7 +49,7 @@ const DefaultFooter = () => {
           Kami senang mendengar kabar dari Anda. Tim kami yang ramah selalu siap
           untuk mengobrol.
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 py-4 mt-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-4 mt-6">
           {footerData.map((item, index) => (
             <div className="space-y-4" key={index}>
               <div className="flex items-center gap-1.5">
@@ -59,7 +59,7 @@ const DefaultFooter = () => {
               <div className="space-y-2 ml-6">
                 <p className="text-sm text-[#5A5A5A]">{item.paragraf}</p>
                 <a
-                  className={`inline-block text-sm text-wrap text-[#5A5A5A] ${
+                  className={`block text-sm break-all text-[#5A5A5A] max-w-full ${
                     index === 0 || index === 1
                       ? "cursor-pointer"
                       : "cursor-text"
