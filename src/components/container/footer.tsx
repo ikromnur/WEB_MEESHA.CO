@@ -9,6 +9,7 @@ import { RiWechatLine } from "react-icons/ri";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
+import Link from "next/link";
 
 const footerData = [
   {
@@ -44,7 +45,9 @@ const DefaultFooter = () => {
   return (
     <footer className="bg-[#F5E1DA]">
       <div className="mx-auto w-full max-w-screen-xl px-4 py-8">
-        <Image src={logo} alt="logo" />
+        <Link href={"/"}>
+          <Image src={logo} alt="logo" />
+        </Link>
         <p className="font-semibold text-xs ml-12 text-[#444444]">
           Kami senang mendengar kabar dari Anda. Tim kami yang ramah selalu siap
           untuk mengobrol.
@@ -93,7 +96,7 @@ const DefaultFooter = () => {
                 Terms of Service
               </Button>
               <Button
-                onClick={() => router.push("/privacy-policy")}
+                onClick={() => router.push("/privacy")}
                 className="text-[#333] font-normal text-sm"
                 variant={"link"}
                 size={"sm"}
