@@ -14,21 +14,20 @@ import ProfileForm from "@/features/profile/components/profile-form";
 const ProfilePage = () => {
   const [session] = useState({
     user: {
-      username: "johnnydoe",
-      name: "John Doe",
-      email: "johndoe@example.com",
-      nohp: "081234567890",
-      photo_profile: "",
+      username: "username",
+      name: "name",
+      email: "email",
+      nohp: "nohp",
     },
   });
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      username: session.user.username,
-      name: session.user.name,
-      email: session.user.email,
-      nohp: session.user.nohp,
+      username: session ? session?.user.username : "",
+      name: session ? session?.user?.name : "",
+      email: session ? session.user?.email : "",
+      nohp: session ? session.user?.nohp : "",
       photo_profile: null,
     },
   });
