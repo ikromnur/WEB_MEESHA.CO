@@ -27,6 +27,13 @@ const products: Product[] = [
     description: "Bouquet cantik dengan mawar merah segar",
     price: 150000,
     image: product,
+    size: "Large",
+    variant: [
+      "Chrysanthemum (various colors)",
+      "Gerbera (various colors)",
+      "Pink Carnation",
+      "Baby's Breath (Gypsophila)",
+    ],
   },
   {
     id: 2,
@@ -34,6 +41,13 @@ const products: Product[] = [
     description: "Kombinasi bunga segar, cocok untuk hadiah",
     price: 175000,
     image: product,
+    size: "Large",
+    variant: [
+      "Chrysanthemum (various colors)",
+      "Gerbera (various colors)",
+      "Pink Carnation",
+      "Baby's Breath (Gypsophila)",
+    ],
   },
   {
     id: 3,
@@ -41,6 +55,13 @@ const products: Product[] = [
     description: "Elegan dan minimalis, cocok untuk acara resmi",
     price: 160000,
     image: product,
+    size: "Large",
+    variant: [
+      "Chrysanthemum (various colors)",
+      "Gerbera (various colors)",
+      "Pink Carnation",
+      "Baby's Breath (Gypsophila)",
+    ],
   },
 ];
 
