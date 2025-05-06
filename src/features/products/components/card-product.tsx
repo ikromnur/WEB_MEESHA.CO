@@ -17,7 +17,7 @@ export const CardProduct = ({ product }: { product: Product }) => {
       >
         <IoMdAdd />
       </Button>
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/products/${product.id}`}>
         <Image
           className="aspect-square mb-4 w-full object-cover"
           src={image}
