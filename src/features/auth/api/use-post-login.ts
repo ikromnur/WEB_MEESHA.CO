@@ -2,18 +2,31 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import { LoginFormSchema } from "@/features/auth/form/login";
 
+// Definisikan tipe respons yang benar
+type UsePostLoginResponse = {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    role: string;
+  };
+};
+
 type UsePostLoginProps = {
-  onSuccess: (data: { token: string }) => void;
+  onSuccess: (data: UsePostLoginResponse) => void; // Ubah tipe data onSuccess
   onError: (e: Error) => void;
 };
 
 export const UsePostLogin = ({ onSuccess, onError }: UsePostLoginProps) => {
   return useMutation({
     mutationFn: async (data: LoginFormSchema) => {
-      const response = await axiosInstance.post("/login", data);
-      return response.data;
+      // Kirim permintaan ke API login
+      const response = await axiosInstance.post("/api/auth/login", data);
+      return response.data; // Pastikan data yang diterima sesuai dengan tipe UsePostLoginResponse
     },
-    onSuccess,
-    onError,
+    onSuccess, // Panggil onSuccess ketika mutasi berhasil
+    onError,   // Panggil onError ketika terjadi kesalahan
   });
 };
