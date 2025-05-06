@@ -8,7 +8,7 @@ const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <DefaultHeader />
-      <main className="pt-[84.84px] pb-20">{children}</main>
+      <main className="pt-[84.84px] pb-20 min-h-[70svh]">{children}</main>
       <DefaultFooter />
     </>
   );
