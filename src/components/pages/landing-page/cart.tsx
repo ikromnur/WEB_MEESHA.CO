@@ -12,8 +12,10 @@ import { Cart } from "@/types/cart";
 import { formatRupiah } from "@/helper/format-rupiah";
 import { UseUpdateCart } from "@/features/cart/api/use-update-cart";
 import { UseDeleteCart } from "@/features/cart/api/use-delete-cart";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+  const router = useRouter();
   const { toast } = useToast();
 
   const { data: cartData, refetch: refetchCart } = UseGetCart({
@@ -113,7 +115,11 @@ export default function CartPage() {
               <span>{formatRupiah(totalAmount)}</span>
             </div>
           </div>
-          <Button size={"lg"} className="w-full">
+          <Button
+            onClick={() => router.push("/checkout")}
+            size={"lg"}
+            className="w-full"
+          >
             Checkout
           </Button>
         </div>

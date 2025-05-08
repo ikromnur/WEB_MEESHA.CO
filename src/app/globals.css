@@ -58,6 +58,16 @@
   }
 }
 
+.no-scrollbar {
+  overflow: auto; /* Allows content to be scrolled */
+  scrollbar-width: none; /* Remove scrollbars in Firefox */
+  -ms-overflow-style: none; /* Remove scrollbars in IE dan Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Remove scrollbars in Chrome, Safari, and Opera */
+}
+
 @layer base {
   * {
     @apply border-border;
