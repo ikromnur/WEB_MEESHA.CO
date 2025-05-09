@@ -15,7 +15,7 @@ import Link from "next/link";
 
 type LoginFormProps = {
   onLogin: (data: LoginFormSchema) => void;
-  loginLoading: boolean;
+  loginLoading?: boolean;
 };
 
 const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
@@ -27,7 +27,7 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
   return (
     <form
       onSubmit={handleSubmit(onLogin)}
-      className="flex flex-col gap-2 w-full max-w-sm md:max-w-72 lg:max-w-96"
+      className="flex flex-col gap-2 w-full max-w-sm md:max-w-72 lg:max-w-96 space-y-2"
     >
       {/* Form Field for Email */}
       <FormField
@@ -78,7 +78,7 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
               </div>
             </FormControl>
             <FormMessage />
-            <div className="mt-3 text-right">
+            <div className="mt-4 text-right">
               <Link href="/forgot-password" className="text-sm mb-10">
                 Lupa Password?
               </Link>
