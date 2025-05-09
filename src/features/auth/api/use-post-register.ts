@@ -13,7 +13,7 @@ export const UsePostRegister = ({
 }: UsePostRegisterProps) => {
   return useMutation({
     mutationFn: async (form: RegisterFormSchema) => {
-      const {data} = await axiosInstance.post("/register", form);
+      const { data } = await axiosInstance.post("/auth/register", form);
       return data.data;
     },
     onSuccess,

@@ -15,12 +15,17 @@ import RegisterForm from "@/features/auth/components/register-form";
 import Link from "next/link";
 
 const RegisterPage = () => {
-  // Form Handling
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  // Handle Register
   const handleRegister = (data: RegisterFormSchema) => {
     mutate(data);
   };
@@ -61,7 +66,6 @@ const RegisterPage = () => {
             Masuk
           </Link>
         </p>
-
       </section>
       {/* Banner */}
       <section className="order-1 md:order-2 relative hidden md:block">

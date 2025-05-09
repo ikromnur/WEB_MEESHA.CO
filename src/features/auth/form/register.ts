@@ -6,21 +6,21 @@ import {
   phoneSchema,
 } from "@/schemas/auth";
 
-// Menambahkan schema untuk konfirmasi password
-export const registerFormSchema = z.object({
-  name: nameSchema,
-  email: emailSchema,
-  phone: phoneSchema,
-  password: passwordSchema,
-  confirmPassword: z.string().min(8, "Konfirmasi password minimal 8 karakter"),
-}).superRefine((data, ctx) => {
-  if (data.password !== data.confirmPassword) {
-    ctx.addIssue({
-      path: ['confirmPassword'],  // Perbaiki path untuk konfirmasi password
-      message: 'Password dan konfirmasi password harus sama',
-      code: z.ZodIssueCode.custom,
-    });
-  }
-});
+export const registerFormSchema = z
+  .object({
+    name: nameSchema,
+    email: emailSchema,
+    phone: phoneSchema,
+    password: passwordSchema,
+    confirmPassword: z
+      .string({
+        required_error: "Confirm password is required",
+      })
+      .min(1, { message: "Password harap diisi" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export type RegisterFormSchema = z.infer<typeof registerFormSchema>;

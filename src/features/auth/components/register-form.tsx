@@ -114,7 +114,7 @@ const RegisterForm = ({ onRegister, registerLoading }: RegisterFormProps) => {
 
       <FormField
         control={control}
-        name="confirmPassword" // Pastikan menggunakan nama yang sesuai
+        name="confirmPassword"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Konfirmasi Password</FormLabel>
