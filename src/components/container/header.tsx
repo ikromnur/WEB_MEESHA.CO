@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../../public/logomeeshatext.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,8 +26,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import photoProfile from "../../../public/avatar.png";
 import { navigation } from "@/data/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 const Navigation = ({
   className,
@@ -78,17 +78,14 @@ const Navigation = ({
 };
 
 const DefaultHeader = () => {
-  const [session] = useState({
-    user: {
-      name: "John Doe",
-      photo_profile: photoProfile,
-    },
-  });
+  const { data: session } = useSession();
+  const user = session?.user;
   const router = useRouter();
+
+  console.log(user);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-
     if (hour >= 5 && hour < 11) return "Good Morning!";
     if (hour >= 11 && hour < 15) return "Good Afternoon!";
     if (hour >= 15 && hour < 18) return "Good Evening!";
@@ -98,6 +95,7 @@ const DefaultHeader = () => {
   return (
     <header className="fixed top-0 left-0 right-0 bg-white z-50 shadow">
       <div className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4">
+        {/* Logo */}
         <Link href="/">
           <Image
             width={200}
@@ -109,15 +107,17 @@ const DefaultHeader = () => {
           />
         </Link>
 
+        {/* Navigation */}
         <Navigation />
 
+        {/* Right section */}
         <div className="flex items-center gap-4">
           {/* Cart */}
           <div className="relative">
             <Button
               onClick={() => router.push("/cart")}
-              size={"icon"}
-              variant={"secondary"}
+              size="icon"
+              variant="secondary"
               className="rounded-full"
             >
               <TbShoppingBag />
@@ -137,18 +137,18 @@ const DefaultHeader = () => {
                 <div className="flex items-center gap-3 cursor-pointer">
                   <Avatar>
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
+                      src={user?.image || "/default-profile.png"}
+                      alt={user?.name || "User"}
                     />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback>
+                      {user?.name?.charAt(0).toUpperCase() || "U"}
+                    </AvatarFallback>
                   </Avatar>
-                  <div className=" flex-col hidden md:flex">
+                  <div className="flex-col hidden md:flex">
                     <span className="text-xs text-[#C0C3C6]">
                       {getGreeting()}
                     </span>
-                    <span className="text-sm font-semibold">
-                      {session?.user?.name}
-                    </span>
+                    <span className="text-sm font-semibold">{user?.name}</span>
                   </div>
                 </div>
               </DropdownMenuTrigger>
@@ -161,19 +161,21 @@ const DefaultHeader = () => {
                 <DropdownMenuItem onClick={() => router.push("/history")}>
                   Riwayat
                 </DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant={"ghost"} onClick={() => router.push("/login")}>
+            <Button variant="ghost" onClick={() => router.push("/login")}>
               Login
             </Button>
           )}
 
-          {/* Sidebar */}
+          {/* Sidebar Mobile */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button size={"icon"} variant={"outline"} className="lg:hidden">
+              <Button size="icon" variant="outline" className="lg:hidden">
                 <IoMenu />
               </Button>
             </SheetTrigger>
