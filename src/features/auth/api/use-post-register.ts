@@ -4,7 +4,7 @@ import { RegisterFormSchema } from "@/features/auth/form/register";
 
 type UsePostRegisterProps = {
   onSuccess: () => void;
-  onError: (e: Error) => void;
+  onError: (e: unknown) => void;
 };
 
 export const UsePostRegister = ({

@@ -13,8 +13,13 @@ import {
 } from "@/features/auth/form/register";
 import RegisterForm from "@/features/auth/components/register-form";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const RegisterPage = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -32,16 +37,34 @@ const RegisterPage = () => {
 
   const { mutate, isPending: registerLoading } = UsePostRegister({
     onSuccess: () => {
-      alert("Registrasi berhasil!");
+      toast({
+        title: "Berhasil",
+        description: "User created successfully",
+      });
       form.reset({
         name: "",
         email: "",
         phone: "",
         password: "",
       });
+      router.push("/login");
     },
-    onError: (error: Error) => {
-      console.log(error);
+    onError: (e: unknown) => {
+      if (axios.isAxiosError(e)) {
+        toast({
+          title: "Error",
+          description:
+            e.response?.data?.error || "Terjadi kesalahan dari server",
+          variant: "destructive",
+        });
+      } else {
+        console.error(e);
+        toast({
+          title: "Error",
+          description: "Terjadi kesalahan yang tidak diketahui",
+          variant: "destructive",
+        });
+      }
     },
   });
 
