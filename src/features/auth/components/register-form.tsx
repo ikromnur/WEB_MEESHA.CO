@@ -64,7 +64,11 @@ const RegisterForm = ({ onRegister, registerLoading }: RegisterFormProps) => {
           <FormItem>
             <FormLabel>Nomor Ponsel</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="Nomor Ponsel WhatsApp" {...field} />
+              <Input
+                type="text"
+                placeholder="Nomor Ponsel WhatsApp"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -108,7 +112,49 @@ const RegisterForm = ({ onRegister, registerLoading }: RegisterFormProps) => {
         )}
       />
 
-      <Button style={{ backgroundColor: "#EC9696" }} type="submit" className="my-4" disabled={registerLoading}>
+      <FormField
+        control={control}
+        name="confirmPassword"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Konfirmasi Password</FormLabel>
+            <FormControl>
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Konfirmasi Password"
+                  {...field}
+                />
+                <Button
+                  type="button"
+                  tabIndex={-1}
+                  variant="ghost"
+                  onClick={handleShowPassword}
+                  size="icon"
+                  className="absolute top-1/2 right-1 -translate-y-1/2 hover:bg-transparent"
+                  aria-label={
+                    showPassword ? "Sembunyikan Password" : "Tampilkan Password"
+                  }
+                >
+                  {showPassword ? (
+                    <FaRegEye className="text-secondary-foreground" />
+                  ) : (
+                    <FaRegEyeSlash className="text-secondary-foreground" />
+                  )}
+                </Button>
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <Button
+        style={{ backgroundColor: "#EC9696" }}
+        type="submit"
+        className="my-4"
+        disabled={registerLoading}
+      >
         {registerLoading ? "Loading..." : "Daftar"}
       </Button>
     </form>
