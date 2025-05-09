@@ -21,6 +21,7 @@ type LoginFormProps = {
 const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const { control, handleSubmit } = useFormContext<LoginFormSchema>();
+
   const handleShowPassword = () => setShowPassword((prev) => !prev);
 
   return (
@@ -28,23 +29,25 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
       onSubmit={handleSubmit(onLogin)}
       className="flex flex-col gap-2 w-full max-w-sm md:max-w-72 lg:max-w-96"
     >
+      {/* Form Field for Email */}
       <FormField
         control={control}
-        name="username"
+        name="email" // Use 'name' instead of 'email'
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Username / Nomor Ponsel</FormLabel>
+            <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="Username/Phone" {...field} />
+              <Input type="text" placeholder="Masukkan Email" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
 
-<FormField
+      {/* Form Field for Password */}
+      <FormField
         control={control}
-        name="password"
+        name="password" // Correctly binding to 'password' in LoginFormSchema
         render={({ field }) => (
           <FormItem>
             <FormLabel>Password</FormLabel>
@@ -72,25 +75,29 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
                     <FaRegEyeSlash className="text-secondary-foreground" />
                   )}
                 </Button>
-
-                {/* Link Lupa Password dipindahkan ke bawah form */}
-                    <div className="mt-3 text-right">
-                      <Link href="/admin/forgot-password" className="text-sm mb-10">
-                        Lupa Password?
-                      </Link>
-                    </div>
               </div>
             </FormControl>
             <FormMessage />
+            <div className="mt-3 text-right">
+              <Link href="/forgot-password" className="text-sm mb-10">
+                Lupa Password?
+              </Link>
+            </div>
           </FormItem>
         )}
       />
 
-<Button style={{ backgroundColor: "#EC9696" }} type="submit" className="my-4" disabled={loginLoading}>
+      {/* Submit Button */}
+      <Button
+        style={{ backgroundColor: "#EC9696" }}
+        type="submit"
+        className="my-4"
+        disabled={loginLoading}
+      >
         {loginLoading ? "Loading..." : "Masuk"}
       </Button>
     </form>
-  )
+  );
 };
 
 export default LoginForm;

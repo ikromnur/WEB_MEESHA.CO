@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import banner from "../../../../public/benner.png";
+import banner from "../../../public/benner.png";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UsePostLogin } from "@/features/auth/api/use-post-login";
@@ -11,23 +11,29 @@ import LoginForm from "@/features/auth/components/login-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-
 const LoginPage = () => {
-  // Form Handling
-  const form = useForm<LoginFormSchema>({
-    resolver: zodResolver(loginFormSchema),
-  });
-
-  // Hook untuk navigasi
   const router = useRouter();
 
-  // Handle Login
+  const form = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
   const { mutate, isPending: loginLoading } = UsePostLogin({
-    onSuccess: () => {
+    onSuccess: (data) => {
       alert("Login berhasil!");
-      router.push("/dashboard"); // Redirect setelah login
+
+      if (data.user.role === "ADMIN") {
+        router.push("/admin/dashboard"); // Jika admin, arahkan ke /admin/dashboard
+      } else {
+        router.push("/"); // Jika user, arahkan ke /dashboard
+      }
+
       form.reset({
-        username: "",
+        email: "",
         password: "",
       });
     },
@@ -53,13 +59,12 @@ const LoginPage = () => {
           </FormProvider>
         </div>
         <p className="text-center text-sm">
-          Belom punya akun?{" "}
-          <Link href="/admin/register" className="font-bold">
+          Belum punya akun?{" "}
+          <Link href="/register" className="font-bold">
             Buat Akun
           </Link>
         </p>
       </section>
-      
 
       {/* Banner */}
       <section className="order-1 md:order-2 relative hidden md:block">
