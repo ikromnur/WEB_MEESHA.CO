@@ -32,7 +32,7 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
       {/* Form Field for Email */}
       <FormField
         control={control}
-        name="email"  // Use 'name' instead of 'email'
+        name="email" // Use 'name' instead of 'email'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Email</FormLabel>
@@ -47,7 +47,7 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
       {/* Form Field for Password */}
       <FormField
         control={control}
-        name="password"  // Correctly binding to 'password' in LoginFormSchema
+        name="password" // Correctly binding to 'password' in LoginFormSchema
         render={({ field }) => (
           <FormItem>
             <FormLabel>Password</FormLabel>
@@ -65,7 +65,9 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
                   onClick={handleShowPassword}
                   size="icon"
                   className="absolute top-4 right-1 -translate-y-1/2 hover:bg-transparent"
-                  aria-label={showPassword ? "Sembunyikan Password" : "Tampilkan Password"}
+                  aria-label={
+                    showPassword ? "Sembunyikan Password" : "Tampilkan Password"
+                  }
                 >
                   {showPassword ? (
                     <FaRegEye className="text-secondary-foreground" />
@@ -73,15 +75,14 @@ const LoginForm = ({ onLogin, loginLoading }: LoginFormProps) => {
                     <FaRegEyeSlash className="text-secondary-foreground" />
                   )}
                 </Button>
-
-                <div className="mt-3 text-right">
-                  <Link href="/forgot-password" className="text-sm mb-10">
-                    Lupa Password?
-                  </Link>
-                </div>
               </div>
             </FormControl>
             <FormMessage />
+            <div className="mt-3 text-right">
+              <Link href="/forgot-password" className="text-sm mb-10">
+                Lupa Password?
+              </Link>
+            </div>
           </FormItem>
         )}
       />

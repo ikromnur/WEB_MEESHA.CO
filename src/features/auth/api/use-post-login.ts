@@ -4,7 +4,6 @@ import { LoginFormSchema } from "@/features/auth/form/login";
 
 // Definisikan tipe respons yang benar
 type UsePostLoginResponse = {
-  token: string;
   user: {
     id: string;
     name: string;
@@ -21,12 +20,12 @@ type UsePostLoginProps = {
 
 export const UsePostLogin = ({ onSuccess, onError }: UsePostLoginProps) => {
   return useMutation({
-    mutationFn: async (data: LoginFormSchema) => {
+    mutationFn: async (payload: LoginFormSchema) => {
       // Kirim permintaan ke API login
-      const response = await axiosInstance.post("/api/auth/login", data);
-      return response.data; // Pastikan data yang diterima sesuai dengan tipe UsePostLoginResponse
+      const { data } = await axiosInstance.post("/auth/login", payload);
+      return data; // Pastikan data yang diterima sesuai dengan tipe UsePostLoginResponse
     },
     onSuccess, // Panggil onSuccess ketika mutasi berhasil
-    onError,   // Panggil onError ketika terjadi kesalahan
+    onError, // Panggil onError ketika terjadi kesalahan
   });
 };

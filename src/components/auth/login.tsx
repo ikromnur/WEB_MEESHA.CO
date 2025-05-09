@@ -12,21 +12,20 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const LoginPage = () => {
-  // Form Handling
-  const form = useForm<LoginFormSchema>({
-    resolver: zodResolver(loginFormSchema),
-  });
-
-  // Hook untuk navigasi
   const router = useRouter();
 
-  // Handle Login
+  const form = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
   const { mutate, isPending: loginLoading } = UsePostLogin({
     onSuccess: (data) => {
       alert("Login berhasil!");
-      localStorage.setItem("token", data.token); 
 
-      // Cek role user dan arahkan ke halaman yang sesuai
       if (data.user.role === "ADMIN") {
         router.push("/admin/dashboard"); // Jika admin, arahkan ke /admin/dashboard
       } else {
