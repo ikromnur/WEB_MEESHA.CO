@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import banner from "../../../public/benner.png";
+import banner from "../../../../public/benner.png";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema, loginFormSchema } from "@/features/auth/form/login";
