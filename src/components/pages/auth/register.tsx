@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import banner from "../../../public/benner.png";
+import banner from "../../../../public/benner.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
