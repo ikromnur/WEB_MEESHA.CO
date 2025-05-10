@@ -17,8 +17,10 @@ import { ContactFormValues } from "../form/contact";
 
 const ContactForm = ({
   onSubmit,
+  isLoading,
 }: {
   onSubmit: (values: ContactFormValues) => void;
+  isLoading?: boolean;
 }) => {
   const form = useFormContext<ContactFormValues>();
   const { handleSubmit, control } = form;
@@ -27,7 +29,7 @@ const ContactForm = ({
     <Form {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 bg-[#F5E1DA] px-4 py-6 max-w-screen-sm rounded-md flex-1 "
+        className="space-y-4 bg-[#F5E1DA] p-8 max-w-screen-sm rounded-md flex-1 "
       >
         <FormField
           control={control}
@@ -104,8 +106,13 @@ const ContactForm = ({
           )}
         />
 
-        <Button type="submit" size={"lg"} className="w-full">
-          Kirim Pesan
+        <Button
+          type="submit"
+          size={"lg"}
+          className="w-full"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Kirim Pesan"}
         </Button>
       </form>
     </Form>

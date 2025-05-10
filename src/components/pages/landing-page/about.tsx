@@ -14,8 +14,12 @@ import {
 } from "@/features/contact/form/contact";
 import ContactForm from "@/features/contact/components/contact-form";
 import { useRouter } from "next/navigation";
+import { UseCreateMessage } from "@/features/contact/api/use-create-message";
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const AboutPage = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -27,8 +31,36 @@ const AboutPage = () => {
     },
   });
 
+  const { mutate: createMessage, isPending: createMessageLoading } =
+    UseCreateMessage({
+      onSuccess: () => {
+        toast({
+          title: "Success",
+          description: "Message sent successfully",
+        });
+        form.reset();
+      },
+      onError: (e: unknown) => {
+        if (axios.isAxiosError(e)) {
+          toast({
+            title: "Error",
+            description:
+              e.response?.data?.error || "Terjadi kesalahan dari server",
+            variant: "destructive",
+          });
+        } else {
+          console.error(e);
+          toast({
+            title: "Error",
+            description: "Terjadi kesalahan yang tidak diketahui",
+            variant: "destructive",
+          });
+        }
+      },
+    });
+
   const onSubmit = (values: ContactFormValues) => {
-    console.log("Form submitted:", values);
+    createMessage(values);
     form.reset();
   };
 
@@ -100,7 +132,10 @@ const AboutPage = () => {
               className="hidden md:block max-w-72 lg:max-w-96  w-full rotate-[340deg]"
             />
             <FormProvider {...form}>
-              <ContactForm onSubmit={onSubmit} />
+              <ContactForm
+                onSubmit={onSubmit}
+                isLoading={createMessageLoading}
+              />
             </FormProvider>
           </div>
         </section>
